@@ -1,0 +1,46 @@
+
+entity Equipment {
+ 	scan_id String
+    equipment_no Integer
+    acquire_date LocalDate
+ }
+ 
+entity EquipmentType {
+ 	name String
+    scan_id String
+    abbreviation String maxlength(3)
+    service_interval Integer
+    available Boolean
+    next_service LocalDate
+    last_service LocalDate
+ }
+ 
+entity Member {
+ 	first_name String
+    last_name String
+    tidyhq_id Integer
+ }
+ 
+entity Certification {
+ 	authority String
+    name String
+    cert_type String
+    cert_card Blob
+ }
+ 
+ entity Rental {
+ 	rental_date LocalDate
+    due_date LocalDate
+    returned_date LocalDate
+    current Boolean
+ }
+
+relationship OneToMany {
+	EquipmentType to Equipment
+    Member to Rental
+}
+
+relationship ManyToOne{
+	Equipment to Rental
+    Certification to Member
+}
